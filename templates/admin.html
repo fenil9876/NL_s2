@@ -1,0 +1,116 @@
+{% load static %}
+{% static 'img' as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-color: #dee6ec;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+        .sidebar button {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .file-input {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .file-input img {
+            width: 80px;
+            cursor: pointer;
+        }
+        .btn-lg {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container vh-100 d-flex align-items-center">
+        <div class="w-100">
+            <div class="bg-light text-center py-3 mb-4">
+                <h3>Hello Admin</h3>
+            </div>
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-3 sidebar">
+                    <button class="btn btn-outline-primary btn-lg">Home</button>
+                    <button class="btn btn-primary btn-lg">Add Apps</button>
+                </div>
+
+                <!-- Form Section -->
+                <div class="col-md-9 form-container">
+                    <form action="{% url 'admin_' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="file-input">
+                            <label for="file-input">
+                                <img src="{% static 'img/pic.png' %}" alt="Upload Icon">
+                            </label>
+                        </div>
+                        <div class="text-center">
+                            <input type="file" id="file-input" name="app_icon" class="form-control mt-3">
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="App Name" name="app_name">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="App Link" name="app_link">
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <select class="form-select" name="app_category">
+                                    <option selected>App Category</option>
+                                    <option value="1">Social Media</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="form-select" name="sub_category">
+                                    <option selected>Sub Category</option>
+                                    <option value="1">Facebook</option>
+                                    <option value="2">Snapchat</option>
+                                    <option value="3">LinkedIn</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <label class="btn btn-success">ADD POINTS</label>
+                        </div>
+                        <div class="text-center">
+                            <input type="number" class="form-control w-50 mx-auto" name="points" value="100">
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <input type="submit" class="btn btn-danger btn-lg" value="SUBMIT">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
